@@ -31,17 +31,17 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const serverless = require("serverless-http"); // ⭐ Add this
+const serverless = require("serverless-http"); // Serverless integration
 const gameRoutes = require("./routes/gameRoutes");
 
-dotenv.config();
+dotenv.config(); // Load environment variables from .env file
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 // API Routes
-app.use("/api/games", gameRoutes);
+app.use("/api/games", gameRoutes);  // Correct the route for games
 
 // MongoDB Connection
 mongoose
@@ -53,10 +53,5 @@ mongoose
     console.error("❌ MongoDB connection error:", err);
   });
 
-// ❌ REMOVE this part:
-// app.listen(process.env.PORT, () => {
-//   console.log(`Server running on http://localhost:${process.env.PORT}`);
-// });
-
-// ✅ INSTEAD export app as serverless function
-module.exports = serverless(app);
+// Instead of app.listen, export as a serverless function for Vercel
+module.exports = serverless(app); // Export the app as a serverless function
