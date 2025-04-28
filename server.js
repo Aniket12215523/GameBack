@@ -27,6 +27,8 @@
 //   });
 
 
+
+
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -45,7 +47,7 @@ app.use("/api/games", gameRoutes);  // Correct the route for games
 
 // MongoDB Connection
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // Ensure connection options
   .then(() => {
     console.log("✅ Connected to MongoDB");
   })
